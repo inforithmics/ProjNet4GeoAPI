@@ -212,7 +212,18 @@ namespace ProjNet.CoordinateSystems.Projections
         private double tsfn(double cosphi, double sinphi, double e)
         {
             double t = (sinphi > 0.0) ? cosphi / (1.0 + sinphi) : (1.0 - sinphi) / cosphi;
-            return Math.Exp(e * Math.Atanh(e * sinphi)) * t;
+            return Math.Exp(e * Atanh(e * sinphi)) * t;
+        }
+
+
+        /// <summary>
+        /// Atanh - Inverse of Math.Tanh
+        /// </summary>
+        /// <remarks>The Math.Atanh is not available for netstandard2.0.</remarks>
+        /// <param name="x"></param>
+        private static double Atanh(double x)
+        {
+            return Math.Log((1 + x) / (1 - x)) * 0.5;
         }
     }
 }
